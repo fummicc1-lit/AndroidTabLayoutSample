@@ -3,6 +3,7 @@ package dev.fummicc1.lit.androidtablayoutsample
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.google.android.material.tabs.TabLayoutMediator
 import dev.fummicc1.lit.androidtablayoutsample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -15,5 +16,9 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         title = "AndroidTabLayoutSample"
+
+        // TabLayoutとViewPager2のリンク
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { _, _ ->
+        }.attach()
     }
 }

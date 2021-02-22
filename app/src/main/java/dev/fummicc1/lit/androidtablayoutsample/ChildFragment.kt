@@ -16,4 +16,8 @@ class ChildFragment : Fragment() {
         val binding = FragmentChildBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
+
+    fun configureArticles(articles: List<Article>) {
+
+    }
 }
