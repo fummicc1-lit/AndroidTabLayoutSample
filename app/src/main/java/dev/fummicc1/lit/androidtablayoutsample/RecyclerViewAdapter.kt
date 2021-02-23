@@ -1,15 +1,17 @@
 package dev.fummicc1.lit.androidtablayoutsample
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 
 class RecyclerViewAdapter(val context: Context): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
-    val articles: MutableList<Article> = mutableListOf()
+    private val articles: MutableList<Article> = mutableListOf()
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val imageView: ImageView = view.findViewById(R.id.articleItemImageView)
@@ -25,6 +27,17 @@ class RecyclerViewAdapter(val context: Context): RecyclerView.Adapter<RecyclerVi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val article = articles[position]
+        val domAnalyzer: DomAnalyzerInterface = DomAnalyzer(article.url)
 
+        Log.d("RecyclerViewAdapter", "domAnalyzer title: ${domAnalyzer.getTitle()}")
+        Log.d("RecyclerViewAdapter", "domAnalyzer OGPImageUrl: ${domAnalyzer.getOGPImageUrl()}")
+
+        holder.imageView.load(domAnalyzer.getOGPImageUrl())
+    }
+
+    fun configureArticles(articles: List<Article>) {
+        this.articles.clear()
+        this.articles.addAll(articles)
+        notifyDataSetChanged()
     }
 }

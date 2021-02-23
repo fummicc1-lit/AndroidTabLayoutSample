@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import dev.fummicc1.lit.androidtablayoutsample.databinding.FragmentCollectionBinding
 
 class CollectionFragment : Fragment() {
 
@@ -13,7 +12,6 @@ class CollectionFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentCollectionBinding.inflate(layoutInflater, container, false)
-        return binding.root
+        return View(requireContext())
     }
 }
