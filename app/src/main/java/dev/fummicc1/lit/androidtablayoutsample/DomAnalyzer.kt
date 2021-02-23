@@ -1,5 +1,6 @@
 package dev.fummicc1.lit.androidtablayoutsample
 
+import android.util.Log
 import org.jsoup.Jsoup
 import java.lang.IllegalArgumentException
 
@@ -13,18 +14,20 @@ class DomAnalyzer(val url: String): DomAnalyzerInterface {
 
     override fun getOGPImageUrl(): String {
         val metaTag = document.head().getElementsByTag("meta")
+        metaTag.forEach { tag ->
+            Log.d("DomAnalyzer", "metatag: ${tag.data()}")
+        }
         val image = metaTag.filter {
             if (it.hasAttr("property").not()) {
                 return@filter false
             }
-            val contentValue = it.attr("content")
-            return@filter contentValue.contains("og:image")
+            val propertyValue = it.attr("property")
+            return@filter propertyValue.contains("og:image")
         }.firstOrNull()
         if (image == null) {
             throw IllegalArgumentException()
         }
         var imageUrl = image.attr("content")
-        imageUrl = imageUrl.replace("og:image", "")
         return imageUrl
     }
 

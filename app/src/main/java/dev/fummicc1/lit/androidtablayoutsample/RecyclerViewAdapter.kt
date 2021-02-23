@@ -8,8 +8,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import kotlinx.coroutines.*
+import okhttp3.Dispatcher
 
 class RecyclerViewAdapter(val context: Context): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+
+    val scope = CoroutineScope(Job() + Dispatchers.IO)
 
     private val articles: MutableList<Article> = mutableListOf()
 
@@ -27,12 +31,17 @@ class RecyclerViewAdapter(val context: Context): RecyclerView.Adapter<RecyclerVi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val article = articles[position]
-        val domAnalyzer: DomAnalyzerInterface = DomAnalyzer(article.url)
 
-        Log.d("RecyclerViewAdapter", "domAnalyzer title: ${domAnalyzer.getTitle()}")
-        Log.d("RecyclerViewAdapter", "domAnalyzer OGPImageUrl: ${domAnalyzer.getOGPImageUrl()}")
+        scope.launch {
+            val domAnalyzer: DomAnalyzerInterface = DomAnalyzer(article.url)
 
-        holder.imageView.load(domAnalyzer.getOGPImageUrl())
+            Log.d("RecyclerViewAdapter", "domAnalyzer title: ${domAnalyzer.getTitle()}")
+            Log.d("RecyclerViewAdapter", "domAnalyzer OGPImageUrl: ${domAnalyzer.getOGPImageUrl()}")
+
+            withContext(Dispatchers.Main) {
+                holder.imageView.load(domAnalyzer.getOGPImageUrl())
+            }
+        }
     }
 
     fun configureArticles(articles: List<Article>) {

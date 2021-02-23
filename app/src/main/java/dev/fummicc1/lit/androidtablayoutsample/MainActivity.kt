@@ -1,6 +1,5 @@
 package dev.fummicc1.lit.androidtablayoutsample
 
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayoutMediator
@@ -17,8 +16,12 @@ class MainActivity : AppCompatActivity() {
 
         title = "AndroidTabLayoutSample"
 
+        val collectionFragment = supportFragmentManager.findFragmentById(R.id.fragment2) as CollectionFragment
+        binding.viewPager.adapter = CollectionAdapter(collectionFragment)
+
         // TabLayoutとViewPager2のリンク
-        TabLayoutMediator(binding.tabLayout, binding.viewPager) { _, _ ->
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = "Tab ${position}"
         }.attach()
     }
 }

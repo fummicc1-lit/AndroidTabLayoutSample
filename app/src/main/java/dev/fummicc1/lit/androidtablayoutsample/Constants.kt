@@ -8,7 +8,8 @@ object Constants {
     )
     val secondArticles: List<Article> = listOf(
         Article("https://qiita.com/pe-ta/items/0ec020c5615e17b1dc48"),
-        Article("https://userweb.mnet.ne.jp/nakama/"),
+//        Article("https://userweb.mnet.ne.jp/nakama/"),
+        Article("https://blog.usejournal.com/early-introduction-of-viewpager2-ff38c60d2169"),
         Article("https://developer.android.com/guide/navigation/navigation-swipe-view-2?hl=ja")
     )
     val thirdArticles: List<Article> = listOf()

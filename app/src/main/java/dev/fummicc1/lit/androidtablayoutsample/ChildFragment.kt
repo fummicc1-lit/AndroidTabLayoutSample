@@ -21,7 +21,7 @@ class ChildFragment : Fragment() {
         val binding = FragmentChildBinding.inflate(layoutInflater, container, false)
         binding.apply {
             val adapter = RecyclerViewAdapter(requireContext())
-            recyclerView.layoutManager = GridLayoutManager(requireContext(), 4)
+            recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
             recyclerView.adapter = adapter
 
             itemStream.observe(viewLifecycleOwner, Observer {
