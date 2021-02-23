@@ -17,7 +17,8 @@ class DomAnalyzer(val url: String): DomAnalyzerInterface {
         metaTag.forEach { tag ->
             Log.d("DomAnalyzer", "metatag: ${tag.data()}")
         }
-        val image = metaTag.filter {
+        val image = metaTag
+            .filter {
             if (it.hasAttr("property").not()) {
                 return@filter false
             }
@@ -27,7 +28,7 @@ class DomAnalyzer(val url: String): DomAnalyzerInterface {
         if (image == null) {
             throw IllegalArgumentException()
         }
-        var imageUrl = image.attr("content")
+        val imageUrl = image.attr("content")
         return imageUrl
     }
 
