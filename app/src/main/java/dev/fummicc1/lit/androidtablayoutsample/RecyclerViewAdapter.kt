@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 
 class RecyclerViewAdapter(val context: Context): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
@@ -11,7 +12,7 @@ class RecyclerViewAdapter(val context: Context): RecyclerView.Adapter<RecyclerVi
     val articles: MutableList<Article> = mutableListOf()
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
-
+        val imageView: ImageView = view.findViewById(R.id.articleItemImageView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,5 +24,7 @@ class RecyclerViewAdapter(val context: Context): RecyclerView.Adapter<RecyclerVi
     override fun getItemCount(): Int = articles.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val article = articles[position]
+
     }
 }
